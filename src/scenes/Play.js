@@ -36,6 +36,9 @@ class Play extends Phaser.Scene {
 
         // milliseconds passed since last spawn
         this.spawnTimer = 0;
+
+        // previous pattern chosen
+        this.previousOne = 2;
     }
 
     // need timer as an argument to get access to delta
@@ -85,7 +88,10 @@ class Play extends Phaser.Scene {
     walkerRespawn(walkerL, walkerC, walkerR) {
         
         // determines which of 3 patterns will be chosen
-        this.whichOne = Math.round(Math.random() * 2);
+        do {
+            this.whichOne = Math.round(Math.random() * 2);
+            console.log(this.whichOne, this.previousOne)
+        } while (this.whichOne == this.previousOne);
 
         // determines whether to send 1 or 2 enemies
         if (Math.round(Math.random())) {
@@ -94,22 +100,28 @@ class Play extends Phaser.Scene {
             if (this.whichOne == 0) {
                 this.walkers.push(new Walker(this, 0, -32, 'walker').setOrigin(0,0));
                 this.walkers.push(new Walker(this, 34, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 0;
             } else if (this.whichOne == 1) {
                 this.walkers.push(new Walker(this, 34, -32, 'walker').setOrigin(0,0));
                 this.walkers.push(new Walker(this, 68, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 1;
             } else {
                 this.walkers.push(new Walker(this, 0, -32, 'walker').setOrigin(0,0));
                 this.walkers.push(new Walker(this, 68, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 2;
             }
         } else {
 
             // 3 patterns of sending 1 enemy
             if (this.whichOne == 0) {
                 this.walkers.push(new Walker(this, 0, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 0;
             } else if (this.whichOne == 1) {
                 this.walkers.push(new Walker(this, 34, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 1;
             } else {
                 this.walkers.push(new Walker(this, 68, -32, 'walker').setOrigin(0,0));
+                this.previousOne = 2;
             }
         }
     }
