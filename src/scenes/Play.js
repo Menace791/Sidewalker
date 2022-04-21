@@ -62,8 +62,9 @@ class Play extends Phaser.Scene {
         // iterate through enemy container to check for collisions and, if so, death
         for(let i = 0; i < this.walkers.length; i++) {
             if(this.checkCollision(this.player, this.walkers[i])) {
-                this.player.destroy();
-                this.gameOver = true;
+                // this.player.destroy();
+                // this.gameOver = true;
+                this.scene.restart();
             }
         }
     }
