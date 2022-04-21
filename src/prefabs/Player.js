@@ -7,10 +7,14 @@ class Player extends Phaser.GameObjects.Sprite {
     }
 
     update() {
+
+        // if not on the leftmost lane, move to the lane on the left
         if(Phaser.Input.Keyboard.JustDown(keyLEFT) &&
            (this.centerLane(this) || this.rightLane(this))) {
                this.x -= 34;
         }
+
+        // if not on the rightmost lane, move to the lane on the right
         if(Phaser.Input.Keyboard.JustDown(keyRIGHT) &&
            (this.leftLane(this) || this.centerLane(this))) {
                this.x += 34;

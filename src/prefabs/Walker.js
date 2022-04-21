@@ -9,6 +9,8 @@ class Walker extends Phaser.GameObjects.Sprite {
 
     update() {
         this.y += this.moveSpeed;
+
+        // destroy the enemy if it reaches the bottom of the screen
         if (this.y > game.config.height) {
             this.destroy();
         }
